@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Person CRUD Operations</h1>
+<div class="index_buttons">
+    <form method="get" th:action="@{/person}">
+        <button>Show All Persons</button>
+    </form>
+    <form method="get" th:action="@{/person/add}">
+        <button>Add Person</button>
+    </form>
+    <form method="get" th:action="@{/person/search}">
+        <button>Search Person</button>
+    </form>
+</div>
+</body>
+</html>

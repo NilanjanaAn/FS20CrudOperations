@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Person List</title>
+    <link th:rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Person List</h1>
+<p th:if="${#lists.size(persons) == 0}">
+    No result!
+</p>
+<div class="scrolling">
+<table th:if="${#lists.size(persons) > 0}">
+    <thead>
+    <tr>
+        <th>Person ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${persons}">
+        <td th:text="${person.getId()}"></td>
+        <td th:text="${person.getFirstName()}"></td>
+        <td th:text="${person.getLastName()}"></td>
+        <td>
+            <form class="table_form" th:action="@{/person/edit/{id}(id=${person.getId()})}" th:method="post">
+                <input type="hidden" name="_method" value="post">
+                <input type="hidden" name="id" id="id" th:value="${person.getId()}" />
+                <input type="hidden" name="firstname" id="firstname" th:value="${person.getFirstName()}" />
+                <input type="hidden" name="lastname" id="lastname" th:value="${person.getLastName()}" />
+                <button type="submit" class="click edit" th:onclick=""></button>
+            </form>
+        </td>
+        <td>
+            <button type="button" class="click delete" onclick="deleteClick(this)"></button>
+            <div class="confirmation" style="display: none">
+                <h5>Confirm?</h5>
+                <form th:action="@{/person/{id}(id=${person.getId()})}" th:method="delete">
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit" class="click yes"></button>
+                    <button type="button" class="click no" onclick="noClick(this)"></button>
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+<!--<button type="button" th:onclick="showAlert()">Show Alert</button>-->
+<div class="index_buttons">
+<form method="get" th:action="@{/}">
+    <button>Home</button>
+</form>
+<form method="get" th:action="@{/person}" th:if="${#lists.size(persons) == 1}">
+    <button>Show All Persons</button>
+</form>
+<form method="get" th:action="@{/person/add}">
+    <button>Add Person</button>
+</form>
+    <form method="get" th:action="@{/person/search}" >
+        <button>Search Person</button>
+    </form>
+</div>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+</body>
+</html>
