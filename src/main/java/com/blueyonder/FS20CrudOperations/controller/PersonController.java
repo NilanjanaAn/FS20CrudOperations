@@ -87,20 +87,4 @@ public class PersonController {
         personService.deletePerson(id);
         return getAllPersons(model);
     }
-
-
-    @GetMapping("/server-up")
-    public String isServerUp() {
-        return "Server is up";
-    }
-
-    @GetMapping("/server-up-2")
-    public String isServerUp2() {
-        return "Server is up 2";
-    }
-
-    @GetMapping("/find/{id}")
-    public String getPersonById(@PathVariable String id) {
-        return "The id is " + id;
-    }
 }
